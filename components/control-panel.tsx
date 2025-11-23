@@ -17,10 +17,12 @@ interface ControlPanelProps {
   EI: number;
   showOriginal: boolean;
   deformationScale: number;
+  useAbsoluteColor: boolean;
   onW0Change: (value: number) => void;
   onEIChange: (value: number) => void;
   onShowOriginalChange: (value: boolean) => void;
   onDeformationScaleChange: (value: number) => void;
+  onUseAbsoluteColorChange: (value: boolean) => void;
   onReset: () => void;
   maxDeflection: number;
   maxDeflectionPosition: number;
@@ -31,30 +33,36 @@ export function ControlPanel({
   EI,
   showOriginal,
   deformationScale,
+  useAbsoluteColor,
   onW0Change,
   onEIChange,
   onShowOriginalChange,
   onDeformationScaleChange,
+  onUseAbsoluteColorChange,
   onReset,
   maxDeflection,
   maxDeflectionPosition,
 }: ControlPanelProps) {
   return (
     <Card id="control-panel" className="w-full">
-      <CardHeader>
-        <CardTitle className="text-lg">Parámetros de Control</CardTitle>
-        <CardDescription>
+      <CardHeader className="pb-4">
+        <CardTitle className="text-base sm:text-lg">
+          Parámetros de Control
+        </CardTitle>
+        <CardDescription className="text-xs sm:text-sm">
           Ajusta los valores para ver la deflexión de la viga
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6">
-        {/* w0 Control */}
-        <div id="w0-control" className="space-y-2">
-          <div className="flex justify-between items-center">
-            <Label htmlFor="w0-slider" className="text-sm font-medium">
+      <CardContent className="space-y-5 sm:space-y-6">
+        <div id="w0-control" className="space-y-2.5">
+          <div className="flex justify-between items-center gap-3">
+            <Label
+              htmlFor="w0-slider"
+              className="text-xs sm:text-sm font-medium"
+            >
               Carga w₀ (kN/m)
             </Label>
-            <span className="text-sm font-mono bg-secondary px-2 py-1 rounded">
+            <span className="text-xs sm:text-sm font-mono bg-secondary px-2.5 py-1 rounded min-w-12 text-center">
               {w0.toFixed(1)}
             </span>
           </div>
@@ -69,13 +77,15 @@ export function ControlPanel({
           />
         </div>
 
-        {/* EI Control */}
-        <div id="ei-control" className="space-y-2">
-          <div className="flex justify-between items-center">
-            <Label htmlFor="ei-slider" className="text-sm font-medium">
+        <div id="ei-control" className="space-y-2.5">
+          <div className="flex justify-between items-center gap-3">
+            <Label
+              htmlFor="ei-slider"
+              className="text-xs sm:text-sm font-medium"
+            >
               Rigidez EI (kN·m²)
             </Label>
-            <span className="text-sm font-mono bg-secondary px-2 py-1 rounded">
+            <span className="text-xs sm:text-sm font-mono bg-secondary px-2.5 py-1 rounded min-w-12 text-center">
               {EI.toFixed(0)}
             </span>
           </div>
@@ -90,13 +100,15 @@ export function ControlPanel({
           />
         </div>
 
-        {/* Deformation Scale */}
-        <div id="scale-control" className="space-y-2">
-          <div className="flex justify-between items-center">
-            <Label htmlFor="scale-slider" className="text-sm font-medium">
+        <div id="scale-control" className="space-y-2.5">
+          <div className="flex justify-between items-center gap-3">
+            <Label
+              htmlFor="scale-slider"
+              className="text-xs sm:text-sm font-medium"
+            >
               Escala de Deformación
             </Label>
-            <span className="text-sm font-mono bg-secondary px-2 py-1 rounded">
+            <span className="text-xs sm:text-sm font-mono bg-secondary px-2.5 py-1 rounded min-w-12 text-center">
               {deformationScale.toFixed(1)}x
             </span>
           </div>
@@ -111,12 +123,14 @@ export function ControlPanel({
           />
         </div>
 
-        {/* Show Original Toggle */}
         <div
           id="show-original-toggle"
-          className="flex items-center justify-between"
+          className="flex items-center justify-between gap-3"
         >
-          <Label htmlFor="show-original" className="text-sm font-medium">
+          <Label
+            htmlFor="show-original"
+            className="text-xs sm:text-sm font-medium"
+          >
             Mostrar posición original
           </Label>
           <Switch
@@ -126,27 +140,43 @@ export function ControlPanel({
           />
         </div>
 
-        {/* Max Deflection Display */}
-        <div className="border-t border-border pt-4 space-y-2">
-          <div className="text-sm">
-            <span className="text-muted-foreground">Deflexión máxima:</span>
-            <p className="font-mono text-primary font-semibold">
+        <div className="flex items-center justify-between gap-3">
+          <Label
+            htmlFor="color-mode"
+            className="text-xs sm:text-sm font-medium"
+          >
+            Coloración absoluta
+          </Label>
+          <Switch
+            id="color-mode"
+            checked={useAbsoluteColor}
+            onCheckedChange={onUseAbsoluteColorChange}
+          />
+        </div>
+
+        <div className="border-t border-border pt-4 sm:pt-5 space-y-3">
+          <div className="text-xs sm:text-sm">
+            <span className="text-muted-foreground block mb-1">
+              Deflexión máxima:
+            </span>
+            <p className="font-mono text-primary font-semibold text-sm sm:text-base">
               {(maxDeflection * 1000).toFixed(2)} mm
             </p>
           </div>
-          <div className="text-sm">
-            <span className="text-muted-foreground">En posición:</span>
-            <p className="font-mono text-accent font-semibold">
+          <div className="text-xs sm:text-sm">
+            <span className="text-muted-foreground block mb-1">
+              En posición:
+            </span>
+            <p className="font-mono text-accent font-semibold text-sm sm:text-base">
               x = {maxDeflectionPosition.toFixed(2)} m
             </p>
           </div>
         </div>
 
-        {/* Reset Button */}
         <Button
           onClick={onReset}
           variant="outline"
-          className="w-full bg-transparent"
+          className="w-full text-xs sm:text-sm py-2 sm:py-2.5 border-2 border-primary/30 hover:border-primary hover:bg-primary/5 font-medium"
         >
           Restablecer Valores
         </Button>

@@ -35,62 +35,70 @@ export function LoadChart({ w0 }: LoadChartProps) {
 
   return (
     <Card id="load-chart" className="w-full">
-      <CardHeader>
-        <CardTitle className="text-lg">Gráfica de Carga w(x)</CardTitle>
-        <CardDescription>
+      <CardHeader className="pb-3">
+        <CardTitle className="text-base sm:text-lg">
+          Gráfica de Carga w(x)
+        </CardTitle>
+        <CardDescription className="text-xs sm:text-sm">
           Distribución de carga a lo largo de la viga (kN/m)
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-2 sm:px-6">
         <ResponsiveContainer width="100%" height={250}>
           <AreaChart
             data={data}
-            margin={{ top: 10, right: 30, left: 20, bottom: 20 }}
+            margin={{ top: 10, right: 10, left: 0, bottom: 20 }}
           >
             <defs>
               <linearGradient id="loadGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#4ade80" stopOpacity={0.9} />
-                <stop offset="95%" stopColor="#4ade80" stopOpacity={0.3} />
+                <stop offset="5%" stopColor="#10b981" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#10b981" stopOpacity={0.1} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#444" opacity={0.5} />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="#d1d5db"
+              opacity={0.7}
+            />
             <XAxis
               dataKey="x"
-              stroke="#aaa"
-              tick={{ fill: "#aaa", fontSize: 12 }}
+              stroke="#6b7280"
+              tick={{ fill: "#6b7280", fontSize: 11 }}
               label={{
                 value: "Posición x (m)",
                 position: "insideBottom",
                 offset: -10,
-                fill: "#ccc",
-                fontSize: 13,
+                fill: "#374151",
+                fontSize: 12,
               }}
             />
             <YAxis
-              stroke="#aaa"
-              tick={{ fill: "#aaa", fontSize: 12 }}
+              stroke="#6b7280"
+              tick={{ fill: "#6b7280", fontSize: 11 }}
               label={{
                 value: "Carga (kN/m)",
                 angle: -90,
                 position: "insideLeft",
-                fill: "#ccc",
-                fontSize: 13,
+                fill: "#374151",
+                fontSize: 12,
                 offset: 10,
               }}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "#1a1a2e",
-                border: "1px solid #333",
+                backgroundColor: "#ffffff",
+                border: "1px solid #d1d5db",
+                borderRadius: "0.375rem",
               }}
-              labelStyle={{ color: "#fff" }}
+              labelStyle={{ color: "#111827", fontWeight: 600 }}
+              itemStyle={{ color: "#10b981" }}
             />
-            <Legend wrapperStyle={{ paddingTop: "10px" }} />
+            <Legend wrapperStyle={{ paddingTop: "10px", fontSize: "12px" }} />
             <Area
               type="monotone"
               dataKey="load"
-              stroke="#4ade80"
-              strokeWidth={3}
+              stroke="#10b981"
+              strokeWidth={2.5}
               fill="url(#loadGradient)"
               name="Carga w(x)"
             />

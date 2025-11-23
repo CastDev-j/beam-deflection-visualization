@@ -3,17 +3,25 @@
 import { useState } from "react";
 import { Html } from "@react-three/drei";
 import { calculateDeflection, calculateLoad } from "@/lib/beam-formulas";
+import { InlineMath } from "react-katex";
+import "katex/dist/katex.min.css";
 
 interface BeamMarkersProps {
   w0: number;
   EI: number;
   deformationScale: number;
+  disabled?: boolean;
 }
 
-export function BeamMarkers({ w0, EI, deformationScale }: BeamMarkersProps) {
+export function BeamMarkers({
+  w0,
+  EI,
+  deformationScale,
+  disabled,
+}: BeamMarkersProps) {
+  if (disabled) return null;
   const [activeMarker, setActiveMarker] = useState<number | null>(null);
 
-  // Puntos de interés en la viga
   const markers = [
     {
       x: 0,
@@ -25,9 +33,18 @@ export function BeamMarkers({ w0, EI, deformationScale }: BeamMarkersProps) {
     {
       x: 2,
       label: "Transición de Carga",
-      description: "Inicio de carga constante (3w₀)",
-      interpretation:
-        "La carga pasa de triangular creciente a constante. La función cambia de w(x)=(3/2)xw₀ a w(x)=3w₀.",
+      description: (
+        <span>
+          Inicio de carga constante (<InlineMath math="3w_0" />)
+        </span>
+      ),
+      interpretation: (
+        <span>
+          La carga pasa de triangular creciente a constante. La función cambia
+          de <InlineMath math="w(x)=\\frac{3}{2} x w_0" /> a{" "}
+          <InlineMath math="w(x)=3 w_0" />.
+        </span>
+      ),
     },
     {
       x: 5,
@@ -40,8 +57,12 @@ export function BeamMarkers({ w0, EI, deformationScale }: BeamMarkersProps) {
       x: 8,
       label: "Transición de Carga",
       description: "Fin de carga constante",
-      interpretation:
-        "La carga pasa de constante a triangular decreciente. La función cambia a w(x)=(3/2)(10-x)w₀.",
+      interpretation: (
+        <span>
+          La carga pasa de constante a triangular decreciente. La función cambia
+          a <InlineMath math="w(x)=\\frac{3}{2}(10 - x) w_0" />.
+        </span>
+      ),
     },
     {
       x: 10,
@@ -67,12 +88,11 @@ export function BeamMarkers({ w0, EI, deformationScale }: BeamMarkersProps) {
 
         return (
           <group key={index} position={position}>
-            {/* Marcador HTML clickeable */}
             <Html
               position={[0, 0, 0]}
               center
               distanceFactor={6}
-              zIndexRange={[100, 0]}
+              wrapperClass="z-20"
             >
               <div
                 onClick={(e) => {
@@ -84,51 +104,47 @@ export function BeamMarkers({ w0, EI, deformationScale }: BeamMarkersProps) {
                 }}
                 className={`
                   w-8 h-8 rounded-full border-3 flex items-center justify-center
-                  transition-all duration-200 cursor-pointer shadow-lg
+                  transition-all duration-200 cursor-pointer
                   ${
                     isActive
-                      ? "bg-blue-500 border-blue-300 scale-125 shadow-blue-500/50"
-                      : "bg-yellow-500 border-yellow-300 hover:scale-110 hover:shadow-yellow-500/50"
+                      ? "bg-blue-500 border-blue-300 scale-125"
+                      : "bg-yellow-500 border-yellow-300 hover:scale-110"
                   }
                 `}
-                style={{
-                  boxShadow: isActive
-                    ? "0 0 20px rgba(59, 130, 246, 0.8), 0 0 40px rgba(59, 130, 246, 0.4)"
-                    : "0 0 15px rgba(234, 179, 8, 0.8), 0 0 30px rgba(234, 179, 8, 0.3)",
-                }}
+                style={{}}
               >
                 <div className="w-3 h-3 bg-white rounded-full opacity-80"></div>
               </div>
             </Html>
 
-            {/* Etiqueta con posición */}
             <Html
               position={[0, 0.5, 0]}
               center
               distanceFactor={8}
+              wrapperClass="z-20"
               style={{
                 pointerEvents: "none",
                 userSelect: "none",
               }}
             >
-              <div className="bg-card/95 backdrop-blur-sm border border-border rounded-lg px-3 py-1.5 shadow-lg">
+              <div className="bg-card/95 backdrop-blur-sm border border-border rounded-lg px-3 py-1.5">
                 <p className="text-xs font-semibold text-primary whitespace-nowrap">
                   x = {marker.x.toFixed(1)} m
                 </p>
               </div>
             </Html>
 
-            {/* Panel de detalles (aparece al hacer click) */}
             {isActive && (
               <Html
                 position={[0, 1.5, 0]}
                 center
                 distanceFactor={10}
+                wrapperClass="z-30"
                 style={{
                   transition: "all 0.3s ease",
                 }}
               >
-                <div className="bg-card/98 backdrop-blur-md border-2 border-primary rounded-lg p-4 shadow-2xl min-w-[320px] max-w-[380px] animate-in fade-in zoom-in duration-200">
+                <div className="bg-card/98 backdrop-blur-md border-2 border-primary rounded-lg p-4 min-w-[320px] max-w-[380px] animate-in fade-in zoom-in duration-200">
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="text-sm font-bold text-primary">
                       {marker.label}
@@ -161,7 +177,6 @@ export function BeamMarkers({ w0, EI, deformationScale }: BeamMarkersProps) {
                     {marker.description}
                   </p>
 
-                  {/* Interpretación del punto */}
                   <div className="bg-secondary/50 rounded-md p-2 mb-3">
                     <p className="text-xs text-foreground leading-relaxed">
                       <strong className="text-primary">Interpretación:</strong>{" "}
@@ -202,7 +217,7 @@ export function BeamMarkers({ w0, EI, deformationScale }: BeamMarkersProps) {
                           Condición:
                         </span>
                         <span className="text-xs font-semibold text-destructive">
-                          y(0) = 0, θ(0) = 0
+                          <InlineMath math="y(0) = 0, \\theta(0) = 0" />
                         </span>
                       </div>
                     )}
@@ -212,7 +227,7 @@ export function BeamMarkers({ w0, EI, deformationScale }: BeamMarkersProps) {
                           Condición:
                         </span>
                         <span className="text-xs font-semibold text-destructive">
-                          y(10) = 0
+                          <InlineMath math="y(10) = 0" />
                         </span>
                       </div>
                     )}

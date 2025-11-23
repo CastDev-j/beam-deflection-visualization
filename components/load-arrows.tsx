@@ -31,7 +31,6 @@ export function LoadArrows({ w0 }: LoadArrowsProps) {
     <group>
       {arrows.map((arrow, i) => (
         <group key={i} position={[arrow.position, 2, 0]}>
-          {/* Arrow shaft */}
           <mesh position={[0, -arrow.length / 2, 0]}>
             <cylinderGeometry args={[0.015, 0.015, arrow.length, 6]} />
             <meshStandardMaterial
@@ -41,7 +40,6 @@ export function LoadArrows({ w0 }: LoadArrowsProps) {
             />
           </mesh>
 
-          {/* Arrow head */}
           <mesh position={[0, -arrow.length, 0]} rotation={[Math.PI, 0, 0]}>
             <coneGeometry args={[0.06, 0.12, 6]} />
             <meshStandardMaterial
