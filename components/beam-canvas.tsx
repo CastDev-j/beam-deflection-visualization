@@ -64,7 +64,7 @@ export function BeamCanvas({
           maxDistance={50}
         />
 
-        <ambientLight intensity={0.6} />
+        <ambientLight intensity={3} />
         <directionalLight position={[10, 10, 5]} intensity={0.8} />
 
         <Grid
