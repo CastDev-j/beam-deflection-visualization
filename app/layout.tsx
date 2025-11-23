@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="light">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.svg" sizes="any" />
       </head>
       <body className={`font-sans antialiased bg-background text-foreground`}>
         {children}
