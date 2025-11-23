@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 export function BeamSupports() {
   return (
@@ -13,7 +13,11 @@ export function BeamSupports() {
 
         {/* Support pattern (simplified) */}
         {Array.from({ length: 4 }).map((_, i) => (
-          <mesh key={i} position={[-0.35, 0.8 - i * 0.5, 0]} rotation={[0, 0, Math.PI / 4]}>
+          <mesh
+            key={i}
+            position={[-0.35, 0.8 - i * 0.5, 0]}
+            rotation={[0, 0, Math.PI / 4]}
+          >
             <boxGeometry args={[0.08, 0.3, 1]} />
             <meshStandardMaterial color="#444444" />
           </mesh>
@@ -35,5 +39,5 @@ export function BeamSupports() {
         </mesh>
       </group>
     </>
-  )
+  );
 }
