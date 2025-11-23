@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
-const DEFAULT_W0 = 20;
+const DEFAULT_W0 = 1.5;
 const DEFAULT_EI = 5000;
 const DEFAULT_DEFORMATION_SCALE = 5;
 
