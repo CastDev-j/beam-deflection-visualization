@@ -114,7 +114,7 @@ export default function BeamDeflectionApp() {
           </div>
 
           <div className="lg:col-span-2 space-y-4 sm:space-y-5 md:space-y-6">
-            <div className="h-[280px] xs:h-[320px] sm:h-[400px] md:h-[480px] lg:h-[500px] w-full beam-canvas-container">
+            <div className="h-[420px] md:h-[480px] lg:h-[500px] w-full beam-canvas-container">
               <BeamCanvas
                 w0={w0}
                 EI={EI}
