@@ -56,10 +56,7 @@ export function ControlPanel({
       <CardContent className="space-y-5 sm:space-y-6">
         <div id="w0-control" className="space-y-2.5">
           <div className="flex justify-between items-center gap-3">
-            <Label
-              htmlFor="w0-slider"
-              className="text-xs sm:text-sm font-medium"
-            >
+            <Label id="w0-label" className="text-xs sm:text-sm font-medium">
               Carga w₀ (kN/m)
             </Label>
             <span className="text-xs sm:text-sm font-mono bg-secondary px-2.5 py-1 rounded min-w-12 text-center">
@@ -68,21 +65,20 @@ export function ControlPanel({
           </div>
           <Slider
             id="w0-slider"
+            name="w0"
             min={1}
             max={100}
             step={0.5}
             value={[w0]}
             onValueChange={(values) => onW0Change(values[0])}
+            aria-labelledby="w0-label"
             className="w-full"
           />
         </div>
 
         <div id="ei-control" className="space-y-2.5">
           <div className="flex justify-between items-center gap-3">
-            <Label
-              htmlFor="ei-slider"
-              className="text-xs sm:text-sm font-medium"
-            >
+            <Label id="ei-label" className="text-xs sm:text-sm font-medium">
               Rigidez EI (kN·m²)
             </Label>
             <span className="text-xs sm:text-sm font-mono bg-secondary px-2.5 py-1 rounded min-w-12 text-center">
@@ -91,21 +87,20 @@ export function ControlPanel({
           </div>
           <Slider
             id="ei-slider"
+            name="ei"
             min={100}
             max={10000}
             step={100}
             value={[EI]}
             onValueChange={(values) => onEIChange(values[0])}
+            aria-labelledby="ei-label"
             className="w-full"
           />
         </div>
 
         <div id="scale-control" className="space-y-2.5">
           <div className="flex justify-between items-center gap-3">
-            <Label
-              htmlFor="scale-slider"
-              className="text-xs sm:text-sm font-medium"
-            >
+            <Label id="scale-label" className="text-xs sm:text-sm font-medium">
               Escala de Deformación
             </Label>
             <span className="text-xs sm:text-sm font-mono bg-secondary px-2.5 py-1 rounded min-w-12 text-center">
@@ -114,11 +109,13 @@ export function ControlPanel({
           </div>
           <Slider
             id="scale-slider"
+            name="deformationScale"
             min={0.1}
             max={10}
             step={0.1}
             value={[deformationScale]}
             onValueChange={(values) => onDeformationScaleChange(values[0])}
+            aria-labelledby="scale-label"
             className="w-full"
           />
         </div>
@@ -127,30 +124,31 @@ export function ControlPanel({
           id="show-original-toggle"
           className="flex items-center justify-between gap-3"
         >
-          <Label
-            htmlFor="show-original"
-            className="text-xs sm:text-sm font-medium"
-          >
+          <Label id="original-label" className="text-xs sm:text-sm font-medium">
             Mostrar posición original
           </Label>
           <Switch
             id="show-original"
+            name="showOriginal"
             checked={showOriginal}
             onCheckedChange={onShowOriginalChange}
+            aria-labelledby="original-label"
           />
         </div>
 
         <div className="flex items-center justify-between gap-3">
           <Label
-            htmlFor="color-mode"
+            id="color-mode-label"
             className="text-xs sm:text-sm font-medium"
           >
             Coloración absoluta
           </Label>
           <Switch
             id="color-mode"
+            name="useAbsoluteColor"
             checked={useAbsoluteColor}
             onCheckedChange={onUseAbsoluteColorChange}
+            aria-labelledby="color-mode-label"
           />
         </div>
 
