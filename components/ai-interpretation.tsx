@@ -119,8 +119,7 @@ export function AIInterpretation({ beamData }: AIInterpretationProps) {
                             Interpretación con IA
                           </CardTitle>
                           <CardDescription className="text-xs sm:text-sm mt-1 leading-relaxed">
-                            Análisis estructural técnico (sin conclusiones ni
-                            despedidas automáticas)
+                            Análisis estructural técnico
                           </CardDescription>
                         </div>
                         <Button
