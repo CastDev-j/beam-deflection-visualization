@@ -9,7 +9,7 @@ interface BeamMeshProps {
   EI: number;
   showOriginal: boolean;
   deformationScale: number;
-  useAbsoluteColor: boolean;
+  useServiceLimitColor: boolean;
 }
 
 export function BeamMesh({
@@ -17,7 +17,7 @@ export function BeamMesh({
   EI,
   showOriginal,
   deformationScale,
-  useAbsoluteColor,
+  useServiceLimitColor,
 }: BeamMeshProps) {
   const meshRef = useRef<Mesh>(null);
 
@@ -125,10 +125,14 @@ export function BeamMesh({
       const y = -deflection * deformationScale;
 
       let deflectionRatio: number;
-      if (useAbsoluteColor) {
+      if (useServiceLimitColor) {
+        // L/360 = 10000mm / 360 = 27.78mm
+        const serviceLimitMm = 10000 / 360; // ~27.78 mm
         const absDeflectionMm = Math.abs(deflection) * 1000;
-        deflectionRatio = Math.min(1, absDeflectionMm / 50);
+        // Ratio: 0-0.33 azul, 0.33-0.66 verde, 0.66-1.0 naranja, >1.0 rojo (excede límite)
+        deflectionRatio = Math.min(1.2, absDeflectionMm / serviceLimitMm);
       } else {
+        // Coloración relativa: de menor a mayor deflexión
         deflectionRatio = Math.min(
           1,
           Math.abs(deflection) / (maxDef || 0.0001)
@@ -167,7 +171,7 @@ export function BeamMesh({
     geometry.attributes.position.needsUpdate = true;
     geometry.attributes.color.needsUpdate = true;
     geometry.computeVertexNormals();
-  }, [w0, EI, deformationScale, useAbsoluteColor]);
+  }, [w0, EI, deformationScale, useServiceLimitColor]);
 
   return (
     <>

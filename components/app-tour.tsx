@@ -68,6 +68,16 @@ export function useAppTour() {
             },
           },
           {
+            element: "#color-mode",
+            popover: {
+              title: "Coloración por Límite L/360",
+              description:
+                "Cambia el modo de coloración de la viga. Cuando está activo, los colores indican qué tan cerca está la deflexión del límite de servicio L/360 (27.78 mm). El rojo significa que excede el límite aceptable.",
+              side: "right",
+              align: "start",
+            },
+          },
+          {
             element: "#ai-interpret-button",
             popover: {
               title: "Interpretación con IA",
@@ -185,6 +195,16 @@ export function useAppTour() {
             title: "Comparación Visual",
             description:
               "Activa o desactiva la visualización de la viga original (sin deformar) para comparar.",
+            side: "right",
+            align: "start",
+          },
+        },
+        {
+          element: "#color-mode",
+          popover: {
+            title: "Coloración por Límite L/360",
+            description:
+              "Cambia el modo de coloración de la viga. Cuando está activo, los colores indican qué tan cerca está la deflexión del límite de servicio L/360 (27.78 mm). El rojo significa que excede el límite aceptable.",
             side: "right",
             align: "start",
           },

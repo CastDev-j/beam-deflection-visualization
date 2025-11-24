@@ -23,7 +23,7 @@ export default function BeamDeflectionApp() {
   const [deformationScale, setDeformationScale] = useState(
     DEFAULT_DEFORMATION_SCALE
   );
-  const [useAbsoluteColor, setUseAbsoluteColor] = useState(false);
+  const [useServiceLimitColor, setUseServiceLimitColor] = useState(false);
 
   const { startTour } = useAppTour();
 
@@ -41,7 +41,7 @@ export default function BeamDeflectionApp() {
     setEI(DEFAULT_EI);
     setDeformationScale(DEFAULT_DEFORMATION_SCALE);
     setShowOriginal(true);
-    setUseAbsoluteColor(false);
+    setUseServiceLimitColor(false);
   };
 
   return (
@@ -95,12 +95,12 @@ export default function BeamDeflectionApp() {
               EI={EI}
               showOriginal={showOriginal}
               deformationScale={deformationScale}
-              useAbsoluteColor={useAbsoluteColor}
+              useServiceLimitColor={useServiceLimitColor}
               onW0Change={setW0}
               onEIChange={setEI}
               onShowOriginalChange={setShowOriginal}
               onDeformationScaleChange={setDeformationScale}
-              onUseAbsoluteColorChange={setUseAbsoluteColor}
+              onUseServiceLimitColorChange={setUseServiceLimitColor}
               onReset={handleReset}
               maxDeflection={maxDeflection}
               maxDeflectionPosition={position}
@@ -114,6 +114,7 @@ export default function BeamDeflectionApp() {
                 <li>• Empotrada en x = 0 m</li>
                 <li>• Apoyo simple en x = 10 m</li>
                 <li>• Longitud total: 10 metros</li>
+                <li>• Criterio L/360: 27.78 mm (NOM/ACI/AISC)</li>
                 <li>• Solución vía Transformada de Laplace</li>
               </ul>
             </div>
@@ -126,7 +127,7 @@ export default function BeamDeflectionApp() {
                 EI={EIDebounced}
                 showOriginal={showOriginal}
                 deformationScale={deformationScaleDebounced}
-                useAbsoluteColor={useAbsoluteColor}
+                useServiceLimitColor={useServiceLimitColor}
               />
             </div>
 

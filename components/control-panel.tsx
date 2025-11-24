@@ -19,12 +19,12 @@ interface ControlPanelProps {
   EI: number;
   showOriginal: boolean;
   deformationScale: number;
-  useAbsoluteColor: boolean;
+  useServiceLimitColor: boolean;
   onW0Change: (value: number) => void;
   onEIChange: (value: number) => void;
   onShowOriginalChange: (value: boolean) => void;
   onDeformationScaleChange: (value: number) => void;
-  onUseAbsoluteColorChange: (value: boolean) => void;
+  onUseServiceLimitColorChange: (value: boolean) => void;
   onReset: () => void;
   maxDeflection: number;
   maxDeflectionPosition: number;
@@ -35,12 +35,12 @@ export function ControlPanel({
   EI,
   showOriginal,
   deformationScale,
-  useAbsoluteColor,
+  useServiceLimitColor,
   onW0Change,
   onEIChange,
   onShowOriginalChange,
   onDeformationScaleChange,
-  onUseAbsoluteColorChange,
+  onUseServiceLimitColorChange,
   onReset,
   maxDeflection,
   maxDeflectionPosition,
@@ -52,7 +52,8 @@ export function ControlPanel({
     maxDeflection,
     maxDeflectionPosition,
     showOriginal,
-    useAbsoluteColor,
+    useServiceLimitColor,
+    serviceLimitDeflection: 10000 / 360, // L/360 en mm
   };
 
   return (
@@ -153,13 +154,13 @@ export function ControlPanel({
             id="color-mode-label"
             className="text-xs sm:text-sm font-medium"
           >
-            Coloración absoluta
+            Coloración por límite L/360
           </Label>
           <Switch
             id="color-mode"
-            name="useAbsoluteColor"
-            checked={useAbsoluteColor}
-            onCheckedChange={onUseAbsoluteColorChange}
+            name="useServiceLimitColor"
+            checked={useServiceLimitColor}
+            onCheckedChange={onUseServiceLimitColorChange}
             aria-labelledby="color-mode-label"
           />
         </div>

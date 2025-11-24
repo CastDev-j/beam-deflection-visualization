@@ -13,7 +13,7 @@ interface BeamCanvasProps {
   EI: number;
   showOriginal: boolean;
   deformationScale: number;
-  useAbsoluteColor: boolean;
+  useServiceLimitColor: boolean;
 }
 
 export function BeamCanvas({
@@ -21,19 +21,23 @@ export function BeamCanvas({
   EI,
   showOriginal,
   deformationScale,
-  useAbsoluteColor,
+  useServiceLimitColor,
 }: BeamCanvasProps) {
   const [showInfo, setShowInfo] = useState(false);
   const legendData = useMemo(() => {
-    if (useAbsoluteColor) {
+    if (useServiceLimitColor) {
       return [
-        { color: "bg-[rgb(26,77,242)]", label: "Azul", desc: "0–12.5 mm" },
-        { color: "bg-[rgb(25,191,102)]", label: "Verde", desc: "12.5–25 mm" },
-        { color: "bg-[rgb(242,140,38)]", label: "Naranja", desc: "25–37.5 mm" },
+        { color: "bg-[rgb(26,77,242)]", label: "Azul", desc: "0–33% L/360" },
+        { color: "bg-[rgb(25,191,102)]", label: "Verde", desc: "33–66% L/360" },
+        {
+          color: "bg-[rgb(242,140,38)]",
+          label: "Naranja",
+          desc: "66–100% L/360",
+        },
         {
           color: "bg-[rgb(230,26,38)]",
           label: "Rojo",
-          desc: ">37.5 mm (≈50 mm máx)",
+          desc: ">100% L/360 (excede límite)",
         },
       ];
     }
@@ -51,7 +55,7 @@ export function BeamCanvas({
       },
       { color: "bg-[rgb(230,26,38)]", label: "Rojo", desc: ">0.9 · δmax" },
     ];
-  }, [useAbsoluteColor]);
+  }, [useServiceLimitColor]);
   return (
     <div className="relative w-full h-full bg-card rounded-lg overflow-hidden border border-border">
       <Canvas>
@@ -85,7 +89,7 @@ export function BeamCanvas({
           EI={EI}
           showOriginal={showOriginal}
           deformationScale={deformationScale}
-          useAbsoluteColor={useAbsoluteColor}
+          useServiceLimitColor={useServiceLimitColor}
         />
         <BeamSupports />
         <LoadArrows w0={w0} />
@@ -146,9 +150,9 @@ export function BeamCanvas({
                   ))}
                 </ul>
                 <p className="mt-1.5 text-[10px] sm:text-xs text-muted-foreground leading-relaxed">
-                  {useAbsoluteColor
-                    ? "Escala absoluta: mm de deflexión (tope ≈ 50 mm)."
-                    : "Escala relativa: fracción δ/δmax en la viga."}
+                  {useServiceLimitColor
+                    ? "Coloración por límite L/360: indica qué tan cerca está de exceder el criterio de servicio (27.78 mm)."
+                    : "Coloración relativa: muestra la magnitud de deflexión respecto al máximo de la viga."}
                 </p>
               </div>
               <div>

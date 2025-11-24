@@ -168,7 +168,7 @@ export function AIInterpretation({ beamData }: AIInterpretationProps) {
                               </div>
                               <div className="flex justify-between">
                                 <span className="text-muted-foreground">
-                                  Escala:
+                                  Escala (no afecta cálculos o interpretación):
                                 </span>
                                 <span className="font-mono font-semibold">
                                   {beamData.deformationScale.toFixed(1)}x
