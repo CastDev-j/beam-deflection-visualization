@@ -11,6 +11,8 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { AIInterpretation } from "@/components/ai-interpretation";
+import type { BeamData } from "@/lib/actions";
 
 interface ControlPanelProps {
   w0: number;
@@ -43,6 +45,16 @@ export function ControlPanel({
   maxDeflection,
   maxDeflectionPosition,
 }: ControlPanelProps) {
+  const beamData: BeamData = {
+    w0,
+    EI,
+    deformationScale,
+    maxDeflection,
+    maxDeflectionPosition,
+    showOriginal,
+    useAbsoluteColor,
+  };
+
   return (
     <Card id="control-panel" className="w-full">
       <CardHeader className="pb-4">
@@ -170,6 +182,8 @@ export function ControlPanel({
             </p>
           </div>
         </div>
+
+        <AIInterpretation beamData={beamData} />
 
         <Button
           onClick={onReset}

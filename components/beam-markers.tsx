@@ -76,8 +76,9 @@ export function BeamMarkers({
   return (
     <>
       {markers.map((marker, index) => {
+        // Invertimos la deflexión para que los marcadores sigan la viga hacia abajo
         const deflection =
-          calculateDeflection(marker.x, w0, EI) * deformationScale;
+          -calculateDeflection(marker.x, w0, EI) * deformationScale;
         const load = calculateLoad(marker.x, w0);
         const position: [number, number, number] = [
           marker.x - 5,
@@ -197,9 +198,9 @@ export function BeamMarkers({
                         Deflexión:
                       </span>
                       <span className="text-xs font-mono font-semibold text-primary">
-                        {(calculateDeflection(marker.x, w0, EI) * 1000).toFixed(
-                          2
-                        )}{" "}
+                        {(
+                          -calculateDeflection(marker.x, w0, EI) * 1000
+                        ).toFixed(2)}{" "}
                         mm
                       </span>
                     </div>

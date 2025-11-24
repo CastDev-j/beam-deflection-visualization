@@ -15,6 +15,7 @@ export function useAppTour() {
         nextBtnText: "Siguiente",
         prevBtnText: "Anterior",
         doneBtnText: "Finalizar",
+        popoverClass: "driverjs-theme",
         steps: [
           {
             element: "#control-panel",
@@ -62,6 +63,16 @@ export function useAppTour() {
               title: "Comparación Visual",
               description:
                 "Activa o desactiva la visualización de la viga original (sin deformar) para comparar.",
+              side: "right",
+              align: "start",
+            },
+          },
+          {
+            element: "#ai-interpret-button",
+            popover: {
+              title: "Interpretación con IA",
+              description:
+                "Obtén un análisis estructural completo de los resultados usando inteligencia artificial. La IA evaluará si la deflexión está dentro de límites aceptables y te dará recomendaciones.",
               side: "right",
               align: "start",
             },
@@ -126,6 +137,7 @@ export function useAppTour() {
       nextBtnText: "Siguiente",
       prevBtnText: "Anterior",
       doneBtnText: "Finalizar",
+      popoverClass: "driverjs-theme",
       steps: [
         {
           element: "#control-panel",
@@ -173,6 +185,16 @@ export function useAppTour() {
             title: "Comparación Visual",
             description:
               "Activa o desactiva la visualización de la viga original (sin deformar) para comparar.",
+            side: "right",
+            align: "start",
+          },
+        },
+        {
+          element: "#ai-interpret-button",
+          popover: {
+            title: "Interpretación con IA",
+            description:
+              "Obtén un análisis estructural completo de los resultados usando inteligencia artificial. La IA evaluará si la deflexión está dentro de límites aceptables y te dará recomendaciones.",
             side: "right",
             align: "start",
           },

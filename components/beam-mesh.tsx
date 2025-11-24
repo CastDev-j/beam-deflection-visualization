@@ -121,7 +121,8 @@ export function BeamMesh({
         w0,
         EI
       );
-      const y = deflection * deformationScale;
+
+      const y = -deflection * deformationScale;
 
       let deflectionRatio: number;
       if (useAbsoluteColor) {

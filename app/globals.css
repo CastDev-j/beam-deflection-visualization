@@ -2,7 +2,6 @@
 @import "tw-animate-css";
 
 :root {
-  /* Light theme - Engineering palette */
   --background: oklch(0.98 0.005 240);
   --foreground: oklch(0.15 0.01 240);
   --card: oklch(1 0 0);
@@ -89,16 +88,12 @@
   }
 }
 
-/* Global Scrollbar Styling */
 html,
 body {
   scrollbar-width: thin;
-  /* Firefox */
   scrollbar-color: hsl(var(--primary)) hsl(var(--card));
-  /* Firefox */
 }
 
-/* WebKit-based browsers */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -133,11 +128,29 @@ body {
   }
 }
 
-/* Utility class for neutral scrollbars if needed */
 .scrollbar-neutral::-webkit-scrollbar-thumb {
   background: hsl(var(--muted));
 }
 
 .scrollbar-neutral {
   scrollbar-color: hsl(var(--muted)) hsl(var(--card));
+}
+
+
+.interpretation-active .beam-canvas-container,
+.interpretation-active #load-chart,
+.interpretation-active #deflection-chart,
+.interpretation-active .formula-container {
+  filter: blur(3px) brightness(0.7);
+  transition: filter 0.3s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.interpretation-active #control-panel {
+  filter: blur(2px) brightness(0.85);
+  pointer-events: none;
+}
+
+.interpretation-active body {
+  overscroll-behavior: contain;
 }

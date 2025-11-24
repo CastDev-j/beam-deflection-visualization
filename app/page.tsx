@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useDebouncedValue } from "@/hooks/use-debounced";
 import { BeamCanvas } from "@/components/beam-canvas";
 import { ControlPanel } from "@/components/control-panel";
 import { DeflectionChart } from "@/components/deflection-chart";
@@ -26,9 +27,14 @@ export default function BeamDeflectionApp() {
 
   const { startTour } = useAppTour();
 
+  // Debounce heavy recalculations when user moves sliders rápidamente
+  const w0Debounced = useDebouncedValue(w0, 120);
+  const EIDebounced = useDebouncedValue(EI, 120);
+  const deformationScaleDebounced = useDebouncedValue(deformationScale, 120);
+
   const { maxDeflection, position } = useMemo(() => {
-    return findMaxDeflection(w0, EI);
-  }, [w0, EI]);
+    return findMaxDeflection(w0Debounced, EIDebounced);
+  }, [w0Debounced, EIDebounced]);
 
   const handleReset = () => {
     setW0(DEFAULT_W0);
@@ -116,20 +122,20 @@ export default function BeamDeflectionApp() {
           <div className="lg:col-span-2 space-y-4 sm:space-y-5 md:space-y-6">
             <div className="h-[420px] md:h-[480px] lg:h-[500px] w-full beam-canvas-container">
               <BeamCanvas
-                w0={w0}
-                EI={EI}
+                w0={w0Debounced}
+                EI={EIDebounced}
                 showOriginal={showOriginal}
-                deformationScale={deformationScale}
+                deformationScale={deformationScaleDebounced}
                 useAbsoluteColor={useAbsoluteColor}
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
               <div className="load-chart-container">
-                <LoadChart w0={w0} />
+                <LoadChart w0={w0Debounced} />
               </div>
               <div className="deflection-chart-container">
-                <DeflectionChart w0={w0} EI={EI} />
+                <DeflectionChart w0={w0Debounced} EI={EIDebounced} />
               </div>
             </div>
 
