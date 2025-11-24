@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import { Html } from "@react-three/drei";
-import { calculateDeflection, calculateLoad } from "@/lib/beam-formulas";
+import {
+  calculateDeflection,
+  calculateLoad,
+  findMaxDeflection,
+} from "@/lib/beam-formulas";
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
@@ -21,6 +25,8 @@ export function BeamMarkers({
 }: BeamMarkersProps) {
   if (disabled) return null;
   const [activeMarker, setActiveMarker] = useState<number | null>(null);
+
+  const { position: maxDeflectionX } = findMaxDeflection(w0, EI);
 
   const markers = [
     {
@@ -47,11 +53,17 @@ export function BeamMarkers({
       ),
     },
     {
-      x: 5,
-      label: "Centro de Viga",
-      description: "Punto medio de la viga",
-      interpretation:
-        "Zona de máxima deflexión esperada. Aquí la viga se deforma más debido a la carga distribuida.",
+      x: maxDeflectionX,
+      label: "Máx. Deflexión",
+      description: "Posición de mayor desplazamiento",
+      interpretation: (
+        <span>
+          Punto de deflexión máxima (L=10 m). La ubicación resulta de la
+          combinación de tramos de carga: crecimiento inicial, tramo constante y
+          descarga decreciente. No necesariamente coincide con el centro
+          geométrico.
+        </span>
+      ),
     },
     {
       x: 8,
