@@ -41,7 +41,7 @@ export function BeamMarkers({
       interpretation: (
         <span>
           La carga pasa de triangular creciente a constante. La función cambia
-          de <InlineMath math="w(x)=\\frac{3}{2} x w_0" /> a{" "}
+          de <InlineMath math="w(x)= \frac{3}{2} x w_0" /> a{" "}
           <InlineMath math="w(x)=3 w_0" />.
         </span>
       ),
@@ -60,7 +60,7 @@ export function BeamMarkers({
       interpretation: (
         <span>
           La carga pasa de constante a triangular decreciente. La función cambia
-          a <InlineMath math="w(x)=\\frac{3}{2}(10 - x) w_0" />.
+          a <InlineMath math="w(x)=\frac{3}{2}(10 - x) w_0" />.
         </span>
       ),
     },
@@ -198,9 +198,9 @@ export function BeamMarkers({
                         Deflexión:
                       </span>
                       <span className="text-xs font-mono font-semibold text-primary">
-                        {(
-                          -calculateDeflection(marker.x, w0, EI) * 1000
-                        ).toFixed(2)}{" "}
+                        {(calculateDeflection(marker.x, w0, EI) * 1000).toFixed(
+                          2
+                        )}{" "}
                         mm
                       </span>
                     </div>
@@ -218,7 +218,7 @@ export function BeamMarkers({
                           Condición:
                         </span>
                         <span className="text-xs font-semibold text-destructive">
-                          <InlineMath math="y(0) = 0, \\theta(0) = 0" />
+                          <InlineMath math="y(0) = 0, \theta(0) = 0" />
                         </span>
                       </div>
                     )}
@@ -232,11 +232,6 @@ export function BeamMarkers({
                         </span>
                       </div>
                     )}
-                  </div>
-                  <div className="mt-3 pt-3 border-t border-border">
-                    <p className="text-[10px] text-muted-foreground italic text-center">
-                      Click en la esfera para cerrar
-                    </p>
                   </div>
                 </div>
               </Html>
