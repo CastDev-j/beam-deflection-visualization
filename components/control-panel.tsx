@@ -149,7 +149,10 @@ export function ControlPanel({
           />
         </div>
 
-        <div className="flex items-center justify-between gap-3">
+        <div
+          id="color-mode-toggle"
+          className="flex items-center justify-between gap-3"
+        >
           <Label
             id="color-mode-label"
             className="text-xs sm:text-sm font-medium"
@@ -157,7 +160,6 @@ export function ControlPanel({
             Coloración por límite L/360
           </Label>
           <Switch
-            id="color-mode"
             name="useServiceLimitColor"
             checked={useServiceLimitColor}
             onCheckedChange={onUseServiceLimitColorChange}

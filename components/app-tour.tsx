@@ -68,7 +68,7 @@ export function useAppTour() {
             },
           },
           {
-            element: "#color-mode",
+            element: "#color-mode-toggle",
             popover: {
               title: "Coloración por Límite L/360",
               description:
@@ -200,7 +200,7 @@ export function useAppTour() {
           },
         },
         {
-          element: "#color-mode",
+          element: "#color-mode-toggle",
           popover: {
             title: "Coloración por Límite L/360",
             description:
